@@ -10,4 +10,86 @@
  License URI:  http://www.gnu.org/licenses/gpl-2.0.html
  Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
  Text Domain:  rprcg
-*/
+ */
+
+
+/*
+ Media queries: https://gist.github.com/gokulkrishh/242e68d1ee94ad05f488
+ */
+
+/* Fontes */
+@font-face {
+    font-family: 'octin_collegeregular';
+    src: url('assets/fonts/octin_college_rg-webfont.woff2') format('woff2'),
+         url('assets/fonts/octin_college_rg-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'octin_collegeregular';
+}
+
+
+/* Logo */
+.site-branding {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    max-width: 400px;
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+    .site-branding {
+        max-width: 300px;	
+    }
+  
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+    .site-branding {
+        float: none;
+        margin: 0 auto;
+        max-width: 280px;	
+    }
+  
+}
+
+/* Responsive Menu */
+#nav-toggle {
+    background-color: #ffffff;
+    border-radius: 50px;
+    height: 50px;
+    top: 50px;
+    z-index: 9999;
+    width: 50px;
+
+    /* Box shadow */
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+}
+
+#nav-toggle span {
+    right: 12px;
+}
+
+.coletivo-menu.coletivo-menu-mobile {
+    top: 110px;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+    #nav-toggle {
+        top: 85px;
+    }
+  
+}
