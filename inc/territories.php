@@ -5,6 +5,7 @@ if ( class_exists( 'CPT' ) ) :
     $arguments = [
         'show_in_rest' => true, // Enable Gutenberg
         'supports'     => [ 'title', 'editor', 'thumbnail' ],
+        'has_archive'  => true
     ];
 
     $territories = new CPT( [
@@ -50,6 +51,193 @@ if ( ! function_exists( 'auto_create_category_territories' ) ) {
 
     }
 
-    add_action( 'save_post', 'auto_create_category_territories', 10, 3 );
+    //add_action( 'save_post', 'auto_create_category_territories', 10, 3 );
 
 }
+
+
+
+
+// Ajax
+
+function territories_register_ajax() {
+
+	if ( is_home() || is_front_page() ) {
+		wp_enqueue_script( 'territories', get_stylesheet_directory_uri() . '/assets/js/territories.js', array( 'jquery' ) );
+		wp_localize_script( 'territories', 'territoriesajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'territories_register_ajax' );
+
+add_action( 'wp_ajax_nopriv_territories_get_post_ajax', 'territories_get_post_ajax' );
+add_action( 'wp_ajax_territories_get_post_ajax', 'territories_get_post_ajax' );
+
+function territories_get_post_ajax() {
+
+   $territoriesid = esc_attr( $_POST['territoriesid'] );
+  
+   $results = territories_return_html( $territoriesid );
+   die( $results );
+
+}
+
+function territories_return_html( $territoriesid ) {
+
+    $territory = get_post( $territoriesid );
+
+    echo '<div class="col-sm-12">';
+
+        echo '<h2 class="title">' . apply_filters( 'the_title', $territory->post_title ) . '</h2>';
+
+        if ( $territory->post_content ) {
+
+            echo '<div class="summary">';
+                echo get_excerpt( $territory->post_content, 600 );
+            echo '</div><!-- /.summary -->';
+
+        }
+
+    echo '</div>';
+
+    echo '<div class="col-sm-6 news-list">';
+
+        $args = [
+            'post_type'      => 'post',
+            'posts_per_page' => 6,
+            'order'          => 'DESC',
+            'post_status'    => 'publish',
+            'meta_query'	=> array(
+                array(
+                    'key'		=> 'what_territories',
+                    'value'		=> $territory->ID,
+                    'compare'	=> 'LIKE'
+                )
+            )
+        ];
+
+        $posts = new WP_Query( $args );
+
+        if ( $posts->have_posts() ) :
+
+            echo '<h3>Notícias</h3>';
+
+            echo '<div class="row">';
+
+                while ( $posts->have_posts() ) :
+                    $posts->the_post();                
+
+                    echo '<a href="' . esc_url( get_the_permalink() ) . '">';
+
+                        if ( has_post_thumbnail() ) {
+                            echo '<div class="col-sm-2 thumbnail">';
+                                the_post_thumbnail( 'thumbnail' );
+                            echo '</div><!-- /.thumbnail -->';
+
+                            echo '<div class="col-sm-10 desc">';
+                        } else {
+                            echo '<div class="col-sm-12 desc">';
+                        }
+
+                        echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                        echo '<span>' . get_the_date() . '</span>';
+
+                        echo '</div><!-- .desc -->';
+
+                    echo '</a>';
+
+                endwhile;
+
+            echo '</div>';      
+            
+            wp_reset_postdata();
+
+
+        endif; // Endif $posts->have_posts()
+
+
+    echo '</div>';
+
+    echo '<div class="col-sm-6 cases-list">';
+
+        $args = [
+            'post_type'      => 'cases',
+            'posts_per_page' => 4,
+            'order'          => 'DESC',
+            'post_status'    => 'publish',
+            'meta_query'	=> array(
+                array(
+                    'key'		=> 'what_territories',
+                    'value'		=> $territory->ID,
+                    'compare'	=> 'LIKE'
+                )
+            )
+        ];
+
+        $cases = new WP_Query( $args );
+
+        if ( $cases->have_posts() ) :
+
+            echo '<h3>Casos</h3>';
+
+            while ( $cases->have_posts() ) :
+                $cases->the_post();                
+
+                echo '<a href="' . esc_url( get_the_permalink() ) . '">';
+
+                    echo '<div ' . thumbnail_bg() . ' class="col-sm-12 each">';
+                        echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                    echo '</div><!-- /.each -->';
+                        
+                echo '</a>';
+
+            endwhile;           
+            
+            wp_reset_postdata();
+
+        endif; // Endif $cases->have_posts()
+
+    echo '</div>';
+
+    echo '<div class="col-sm-12">';
+
+        $args = [
+            'post_type'      => 'courses',
+            'posts_per_page' => 2,
+            'order'          => 'DESC',
+            'post_status'    => 'publish',
+            'meta_query'	=> array(
+                array(
+                    'key'		=> 'what_territories',
+                    'value'		=> $territory->ID,
+                    'compare'	=> 'LIKE'
+                )
+            )
+        ];
+
+        $courses = new WP_Query( $args );
+
+        if ( $courses->have_posts() ) :
+
+            echo '<h3>Cursos</h3>';
+
+            while ( $courses->have_posts() ) :
+                $courses->the_post();                
+
+                echo '<a href="' . esc_url( get_the_permalink() ) . '">';
+
+                    echo '<div ' . thumbnail_bg() . ' class="col-sm-12 thumbnail">';
+                        echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                    echo '</div><!-- /.thumbnail -->';
+                        
+                echo '</a>';
+
+            endwhile;           
+            
+            wp_reset_postdata();
+
+        endif; // Endif $courses->have_posts()
+
+    echo '</div>';
+
+}
+
