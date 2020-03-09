@@ -85,7 +85,7 @@ if ( coletivo_is_selective_refresh() ) {
                         </div><!-- /.territories-list -->
 
 
-                        <div id="territories-print">
+                        <div id="territories-print" class="row">
                             <?php territories_return_html( $first ); ?>
                         </div><!-- /.territories-print -->
 

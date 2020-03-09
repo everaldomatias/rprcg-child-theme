@@ -128,26 +128,30 @@ function territories_return_html( $territoriesid ) {
 
                     echo '<a href="' . esc_url( get_the_permalink() ) . '">';
 
-                        if ( has_post_thumbnail() ) {
-                            echo '<div class="col-sm-2 thumbnail">';
-                                the_post_thumbnail( 'thumbnail' );
-                            echo '</div><!-- /.thumbnail -->';
+                        echo '<div class="col-sm-12 each">';
 
-                            echo '<div class="col-sm-10 desc">';
-                        } else {
-                            echo '<div class="col-sm-12 desc">';
-                        }
+                            if ( has_post_thumbnail() ) {
+                                echo '<div class="col-sm-2 thumbnail no-padding">';
+                                    the_post_thumbnail( 'thumbnail' );
+                                echo '</div><!-- /.thumbnail -->';
 
-                        echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
-                        echo '<span>' . get_the_date() . '</span>';
+                                echo '<div class="col-sm-10 desc">';
+                            } else {
+                                echo '<div class="col-sm-12 desc">';
+                            }
 
-                        echo '</div><!-- .desc -->';
+                            echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                            echo '<span>' . get_the_date() . '</span>';
+
+                            echo '</div><!-- /.desc -->';
+
+                        echo '</div><!-- /.each -->';
 
                     echo '</a>';
 
                 endwhile;
 
-            echo '</div>';      
+            echo '</div><!-- /.row -->';
             
             wp_reset_postdata();
 
@@ -190,15 +194,15 @@ function territories_return_html( $territoriesid ) {
                         
                 echo '</a>';
 
-            endwhile;           
-            
+            endwhile;
+
             wp_reset_postdata();
 
         endif; // Endif $cases->have_posts()
 
     echo '</div>';
 
-    echo '<div class="col-sm-12">';
+    echo '<div class="col-sm-12 courses-list">';
 
         $args = [
             'post_type'      => 'courses',
@@ -220,18 +224,21 @@ function territories_return_html( $territoriesid ) {
 
             echo '<h3>Cursos</h3>';
 
-            while ( $courses->have_posts() ) :
-                $courses->the_post();                
+                while ( $courses->have_posts() ) :
+                    $courses->the_post();                
 
-                echo '<a href="' . esc_url( get_the_permalink() ) . '">';
+                    echo '<a href="' . esc_url( get_the_permalink() ) . '">';
 
-                    echo '<div ' . thumbnail_bg() . ' class="col-sm-12 thumbnail">';
-                        echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
-                    echo '</div><!-- /.thumbnail -->';
-                        
-                echo '</a>';
+                        echo '<div class="col-sm-12 each">';
+                            echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                            echo '<div class="col-sm-12 desc no-padding">';
+                                echo get_excerpt( get_the_content(), 400 );
+                            echo '</div><!-- /.desc -->';
+                        echo '</div><!-- /.each -->';
+                            
+                    echo '</a>';
 
-            endwhile;           
+                endwhile;
             
             wp_reset_postdata();
 

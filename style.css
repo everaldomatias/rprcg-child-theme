@@ -169,6 +169,11 @@ h6 {
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
 }
 
+/* Posts Home */
+.section-news .list-article {
+    height: 500px;
+}
+
 /* Territories Tabs Home */
 .territories-list {
     background-color: #cccccc;
@@ -201,6 +206,10 @@ h6 {
 #territories-print .summary {
     margin-bottom: 30px;
 }
+
+#territories-print .news-list .each {
+    margin-bottom: 15px;
+}
 #territories-print .news-list .thumbnail img {
     border-radius: 5px;
 }
@@ -225,6 +234,20 @@ h6 {
 #territories-print .cases-list .each h3 {
     color: #ffffff;
     margin-bottom: 0;
+}
+#territories-print .courses-list {
+    margin-top: 30px;
+}
+#territories-print .courses-list .each {
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    padding-top: 15px;
+    transition: all 0.2s ease-in-out;
+}
+#territories-print .courses-list .each:hover {
+    background-color: #f9f9f9;
 }
 .territories-entry .all-territories {
     text-align: center;
