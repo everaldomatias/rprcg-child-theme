@@ -145,6 +145,7 @@ h6 {
     background-color: #f3f3f3;
     background-image: url( 'assets/images/bg-section-web.png' );
     background-repeat: no-repeat;
+    background-size: cover;
 }
 .section-news .list-article-thumb img {
     background-color: #ffffff;
@@ -192,7 +193,7 @@ h6 {
 
 /* Territories Tabs Home */
 .territories-list {
-    background-color: #cccccc;
+    background-color: #eeeeee;
     border-radius: 5px;
     padding-left: 0;
     display: -webkit-box;
@@ -218,6 +219,21 @@ h6 {
     overflow: hidden;
     padding-bottom: 60px;
     padding-top: 30px;
+}
+#territories-print .title {
+    position: relative;
+}
+#territories-print .title a {
+    color: #cccccc;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 10px 0 0 20px;
+    position: absolute;
+}
+#territories-print .title a:hover {
+    color: #333333;
+    text-decoration: none;
 }
 #territories-print .summary {
     margin-bottom: 30px;
@@ -286,6 +302,10 @@ h6 {
 }
 #territories-print .courses-list {
     margin-top: 30px;
+}
+#territories-print .courses-list a,
+#territories-print .courses-list a:hover .desc {
+    color: #777777 !important;
 }
 #territories-print .courses-list .each {
     background-color: #f7f7f7;

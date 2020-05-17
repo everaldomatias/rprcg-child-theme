@@ -83,11 +83,13 @@ function territories_get_post_ajax() {
 
 function territories_return_html( $territoriesid ) {
 
+    $color = get_post_meta( $territoriesid, 'territories_color', true );
+
     $territory = get_post( $territoriesid );
 
     echo '<div class="col-sm-12">';
 
-        echo '<h2 class="title">' . apply_filters( 'the_title', $territory->post_title ) . '</h2>';
+        echo '<h2 class="title">' . apply_filters( 'the_title', $territory->post_title ) . '<a href="' . esc_url( get_the_permalink( $territoriesid ) ) . '">Veja tudo sobre o território</a></h2>';
 
         if ( $territory->post_content ) {
 
@@ -141,7 +143,7 @@ function territories_return_html( $territoriesid ) {
                             }
 
                             echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
-                            echo '<span>' . get_the_date() . '</span>';
+                            echo '<span style="color:' . $color . ';">' . get_the_date() . '</span>';
 
                             echo '</div><!-- /.desc -->';
 

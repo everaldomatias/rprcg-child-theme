@@ -70,7 +70,7 @@ if ( coletivo_is_selective_refresh() ) {
                                     } else {
                                         $class = 'off';
                                     } ?>
-                                    <a style="background-color: <?php echo $color; ?>" data-idpost="<?php echo( basename( get_permalink() ) ); ?>" class="buttons-sections <?php echo $class; ?>" onclick="apfaddpost( <?php echo get_the_ID(); ?> );" ><?php the_title(); ?></a>		
+                                    <a style="background-color: <?php echo $color; ?>;" data-idpost="<?php echo( basename( get_permalink() ) ); ?>" class="buttons-sections <?php echo $class; ?>" onclick="apfaddpost( <?php echo get_the_ID(); ?> );" ><?php the_title(); ?></a>		
                                     
 
                                 <?php endwhile;
