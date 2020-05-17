@@ -163,7 +163,38 @@ function territories_return_html( $territoriesid ) {
 
     echo '</div>';
 
-    echo '<div class="col-sm-6 cases-list">';
+    territories_loop_cases( $territory->ID );
+
+    territories_loop_courses( $territory->ID, 'col-sm-12' );
+
+}
+
+function territories_print_color_single() {
+
+    if ( is_singular( 'territories' ) ) {
+
+        $color = get_post_meta( get_the_ID(), 'territories_color', true );
+
+        $css = '<style>';
+        $css .= '.page-header a, #content-inside a, #secondary a { color: ' . $color . ' } ';
+        $css .= '.page-header .nav-links a { background-color: ' . $color . '; color: #ffffff; } ';
+        $css .= '#content-inside #secondary input[type="submit"].search-submit { background: ' . $color . ' !important } ';
+        $css .= '</style>';
+
+        echo $css;
+
+    }
+
+}
+add_action( 'wp_head', 'territories_print_color_single' );
+
+
+/**
+ * Print the loop cases
+ */
+function territories_loop_cases( $id, $class = 'col-sm-6' ) {
+    
+    echo '<div class="' . $class . ' cases-list">';
 
         $args = [
             'post_type'      => 'cases',
@@ -173,7 +204,7 @@ function territories_return_html( $territoriesid ) {
             'meta_query'	=> array(
                 array(
                     'key'		=> 'what_territories',
-                    'value'		=> $territory->ID,
+                    'value'		=> $id,
                     'compare'	=> 'LIKE'
                 )
             )
@@ -203,8 +234,14 @@ function territories_return_html( $territoriesid ) {
         endif; // Endif $cases->have_posts()
 
     echo '</div>';
+}
 
-    echo '<div class="col-sm-12 courses-list">';
+/**
+ * Print the loop courses
+ */
+function territories_loop_courses( $id, $class = 'col-sm-6' ) {
+
+    echo '<div class="' . $class . ' courses-list">';
 
         $args = [
             'post_type'      => 'courses',
@@ -214,7 +251,7 @@ function territories_return_html( $territoriesid ) {
             'meta_query'	=> array(
                 array(
                     'key'		=> 'what_territories',
-                    'value'		=> $territory->ID,
+                    'value'		=> $id,
                     'compare'	=> 'LIKE'
                 )
             )
@@ -250,3 +287,42 @@ function territories_return_html( $territoriesid ) {
 
 }
 
+
+function territories_loop_news( $id, $class = 'col-sm-6' ) {
+
+    echo '<div class="' . $class . ' news-list">';
+
+        $args = [
+            'post_type'      => 'post',
+            'posts_per_page' => 6,
+            'order'          => 'DESC',
+            'post_status'    => 'publish',
+            'meta_query'	=> array(
+                array(
+                    'key'		=> 'what_territories',
+                    'value'		=> $id,
+                    'compare'	=> 'LIKE'
+                )
+            )
+        ];
+
+        $posts = new WP_Query( $args );
+
+        if ( $posts->have_posts() ) :
+
+            echo '<h3>Notícias</h3>';
+
+                while ( $posts->have_posts() ) :
+                    $posts->the_post();                
+
+                    get_template_part( 'template-parts/content', 'list' );
+
+                endwhile;
+         
+            wp_reset_postdata();
+
+        endif; // Endif $posts->have_posts()
+
+    echo '</div>';
+
+}
