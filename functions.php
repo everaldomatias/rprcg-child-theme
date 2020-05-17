@@ -25,6 +25,11 @@ include_once( 'inc/courses.php' );
  */
 include_once( 'inc/cases.php' );
 
+/**
+ * CPT Downloads
+ */
+include_once( 'inc/downloads.php' );
+
 
 // Functions
 

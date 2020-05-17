@@ -386,6 +386,27 @@ h6,
     color: #333333 !important;
 }
 
+/* Downloads */
+
+/* Downloads >> Archive */
+.post-type-archive-downloads .list-downloads {
+    align-content: stretch;
+    display: flex;
+    flex-wrap: wrap;
+}
+.post-type-archive-downloads .list-downloads > div {
+    flex-grow: 1;
+}
+.post-type-archive-downloads .list-downloads .list-article-thumb,
+.post-type-archive-downloads .list-downloads .list-article-content {
+    float: none;
+    margin-right: 0;
+}
+.post-type-archive-downloads .list-downloads .list-article-thumb img {
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Home Section Social */
 .section-social {
     background-attachment: fixed;
