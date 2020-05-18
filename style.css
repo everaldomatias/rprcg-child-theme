@@ -256,6 +256,8 @@ h6,
 }
 #territories-print .news-list .thumbnail img {
     border-radius: 5px;
+    object-fit: cover;
+    height: 90px;
 }
 #territories-print .news-list .desc > h3 {
     margin-bottom: 0;

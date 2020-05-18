@@ -132,15 +132,17 @@ function territories_return_html( $territoriesid ) {
 
                         echo '<div class="col-sm-12 each">';
 
-                            if ( has_post_thumbnail() ) {
-                                echo '<div class="col-sm-2 thumbnail no-padding">';
-                                    the_post_thumbnail( 'thumbnail' );
-                                echo '</div><!-- /.thumbnail -->';
+                            echo '<div class="col-sm-2 thumbnail no-padding">';
 
-                                echo '<div class="col-sm-10 desc">';
-                            } else {
-                                echo '<div class="col-sm-12 desc">';
-                            }
+                                if ( has_post_thumbnail() ) {
+                                    the_post_thumbnail( 'thumbnail' );
+                                } else {
+                                    echo '<img alt="" src="'. get_template_directory_uri() . '/assets/images/placholder2.png' .'">';
+                                }
+
+                            echo '</div><!-- /.thumbnail -->';
+
+                            echo '<div class="col-sm-10 desc">';
 
                             echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
                             echo '<span style="color:' . $color . ';">' . get_the_date() . '</span>';
