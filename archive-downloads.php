@@ -40,15 +40,21 @@ get_header(); ?>
                             </div>
 
                             <div class="list-article-content col-sm-8">
-                                <div class="list-article-meta">
-                                    <?php the_category(' / '); ?>
-                                </div>
                                 <header class="entry-header">
-                                    <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                                    <h2 class="entry-title"><?php the_title(); ?></h2>
                                 </header><!-- .entry-header -->
                                 <div class="entry-content">
                                     <?php the_content(); ?>
                                 </div><!-- .entry-content -->
+                                <div class="entry-file">
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/file.png" alt="Download file">
+                                    <?php
+                                    $file_id = get_post_meta( get_the_ID(), 'download_file', true );
+                                    $file = wp_get_attachment_url( $file_id );
+                                    echo '<a href="' . $file . '" download>Download: ' . basename( get_attached_file( $file_id ) ) . ' (';
+                                    the_file_size( $file_id );
+                                    echo ')</a>'; ?>
+                                </div><!-- /.entry-file -->
                             </div>
 
                         </article><!-- #post-## -->                        

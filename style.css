@@ -391,8 +391,12 @@ h6,
 /* Downloads >> Archive */
 .post-type-archive-downloads .list-downloads {
     align-content: stretch;
+    background-color: #f8f9f9;
+    border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
+    margin: 15px auto 30px;
+    overflow: hidden;
 }
 .post-type-archive-downloads .list-downloads > div {
     flex-grow: 1;
@@ -402,9 +406,24 @@ h6,
     float: none;
     margin-right: 0;
 }
+.post-type-archive-downloads .list-downloads .list-article-thumb {
+    padding-left: 0;
+}
 .post-type-archive-downloads .list-downloads .list-article-thumb img {
     height: 100%;
     object-fit: cover;
+}
+.post-type-archive-downloads .list-downloads .list-article-content {
+    padding-bottom: 15px;
+    padding-top: 30px;
+}
+.post-type-archive-downloads .list-downloads .list-article-content .entry-content {
+    margin-bottom: 15px;
+}
+.post-type-archive-downloads .list-downloads .entry-file img {
+    height: auto;
+    padding: 0 10px 10px 0;
+    width: 60px;
 }
 
 /* Home Section Social */

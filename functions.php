@@ -90,3 +90,39 @@ function thumbnail_bg( $size = 'thumbnail' ) {
 	$get_post_thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $size, false, '' );
 	return 'style="background-image: url(' . esc_url( $get_post_thumbnail[0] ) . ' )"';
 }
+
+if( !function_exists( 'the_file_size' ) ) {
+
+    /**
+     * 
+     * WordPress function for get file size in attachment
+     * 
+     * @author  Everaldo Matias
+     * @link    https://everaldo.dev
+     * 
+     * @version 1.0
+     * @license http://www.opensource.org/licenses/mit-license.html MIT License
+     * 
+     * @see     https://developer.wordpress.org/reference/functions/get_attached_file/
+     * @see     https://www.php.net/manual/pt_BR/function.filesize.php
+     * 
+     * @param   string,integer  $id of the attachment
+     * 
+     */
+
+    function the_file_size( $id ) {
+
+        // Get the file path
+        $file_path = get_attached_file( $id );
+
+        // Get the file size
+        $file_size = filesize( $file_path );
+
+        // Return file size in megabytes
+        $file_size = round( $file_size / 1024 / 1024, 1 );
+
+        echo $file_size . ' MB';
+
+    }
+    
+}

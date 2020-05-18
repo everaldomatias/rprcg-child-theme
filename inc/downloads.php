@@ -18,3 +18,20 @@ if ( class_exists( 'CPT' ) ) :
     $downloads->menu_icon( 'dashicons-download' );
 
 endif;
+
+if ( ! function_exists( 'tm_download_single_redirect' ) ) {
+
+    function tm_download_single_redirect() {
+
+        if ( ! is_singular( 'downloads' ) )
+            return;
+
+        wp_redirect( get_post_type_archive_link( 'downloads' ), 301 );
+
+        exit;
+
+    }
+
+    add_action( 'template_redirect', 'tm_download_single_redirect' );
+
+}
