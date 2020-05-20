@@ -91,7 +91,7 @@ function thumbnail_bg( $size = 'thumbnail' ) {
 	return 'style="background-image: url(' . esc_url( $get_post_thumbnail[0] ) . ' )"';
 }
 
-if( !function_exists( 'the_file_size' ) ) {
+if( ! function_exists( 'the_file_size' ) ) {
 
     /**
      * 
@@ -126,3 +126,38 @@ if( !function_exists( 'the_file_size' ) ) {
     }
     
 }
+
+if ( ! function_exists( 'filter_get_the_archive_title' ) ) {
+
+	/**
+     * 
+     * Filter the archives title
+     * 
+     * @author  Everaldo Matias
+     * @link    https://everaldo.dev
+     * 
+     * @version 1.0
+     * @license http://www.opensource.org/licenses/mit-license.html MIT License
+     * 
+     * @see     https://developer.wordpress.org/reference/functions/get_the_archive_title/
+     * @see     https://developer.wordpress.org/reference/functions/is_post_type_archive/
+	 * @see		https://developer.wordpress.org/reference/functions/post_type_archive_title/
+     * 
+     * @param   string $title to filter
+     * 
+     */
+
+	function filter_get_the_archive_title( $title ) {
+
+		if ( is_post_type_archive() ) {
+			$title = post_type_archive_title( '', false );
+		}
+
+		return $title;
+
+	}
+
+	add_filter( 'get_the_archive_title', 'filter_get_the_archive_title' );
+
+}
+	

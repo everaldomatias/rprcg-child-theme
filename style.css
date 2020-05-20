@@ -33,6 +33,11 @@
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.btn:hover {
+    opacity: 0.8;
 }
 
 /* Headings */
