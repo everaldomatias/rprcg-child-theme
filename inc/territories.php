@@ -216,7 +216,7 @@ function territories_loop_cases( $id, $class = 'col-sm-6' ) {
 
         if ( $cases->have_posts() ) :
 
-            echo '<h3>Casos</h3>';
+            echo '<h3>Casos <a href="' . esc_url( home_url() . '/casos?what_territories=' ) . $id . '">Veja todos os casos</a></h3>';
 
             while ( $cases->have_posts() ) :
                 $cases->the_post();                
@@ -225,6 +225,7 @@ function territories_loop_cases( $id, $class = 'col-sm-6' ) {
 
                     echo '<div ' . thumbnail_bg() . ' class="col-sm-12 each">';
                         echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                        $what_territories = get_post_meta( get_the_ID(), 'what_territories' );
                     echo '</div><!-- /.each -->';
                         
                 echo '</a>';

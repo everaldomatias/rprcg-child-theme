@@ -8,14 +8,14 @@ if ( class_exists( 'CPT' ) ) :
         'has_archive'  => true
     ];
 
-    $territories = new CPT( [
+    $courses = new CPT( [
         'post_type_name' => 'courses',
         'singular'       => 'Curso',
         'plural'         => 'Cursos',
         'slug'           => 'cursos'
     ], $arguments );
 
-    $territories->menu_icon( 'dashicons-book-alt' );
+    $courses->menu_icon( 'dashicons-book-alt' );
 
 endif;
 
