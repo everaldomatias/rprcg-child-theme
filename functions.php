@@ -91,7 +91,7 @@ function thumbnail_bg( $size = 'thumbnail' ) {
 	return 'style="background-image: url(' . esc_url( $get_post_thumbnail[0] ) . ' )"';
 }
 
-if( ! function_exists( 'the_file_size' ) ) {
+if ( ! function_exists( 'the_file_size' ) ) {
 
     /**
      * 

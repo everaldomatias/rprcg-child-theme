@@ -21,6 +21,22 @@ endif;
 
 if ( ! function_exists( 'cases_pre_get_posts' ) ) {
 
+    /**
+     * 
+     * WordPress function for filter posts Cases with GET parameter
+     * 
+     * @author  Everaldo Matias
+     * @link    https://everaldo.dev
+     * 
+     * @version 1.0
+     * @license http://www.opensource.org/licenses/mit-license.html MIT License
+     * 
+     * @see     https://codex.wordpress.org/Class_Reference/WP_Meta_Query
+     * @see     https://developer.wordpress.org/reference/hooks/pre_get_posts
+     * 
+     * @param   string,integer  $id of the attachment
+     * 
+     */
     function cases_pre_get_posts( $query ) {
         
         // do not modify queries in the admin
@@ -32,11 +48,11 @@ if ( ! function_exists( 'cases_pre_get_posts' ) ) {
         if ( isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'cases' ) {
             
             // allow the url to alter the query
-            if ( isset( $_GET['what_territories'] ) ) {
+            if ( isset( $_GET['territorio'] ) ) {
 
                 $meta_query[] = array(
                     'key'		=> 'what_territories',
-                    'value'		=> sanitize_text_field( $_GET['what_territories'] ),
+                    'value'		=> sanitize_text_field( $_GET['territorio'] ),
                     'compare'	=> 'LIKE',
                 );
 
