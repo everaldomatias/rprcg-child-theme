@@ -194,8 +194,8 @@ h6,
 }
 
 /* Posts Home */
-.section-news .list-article {
-    height: 500px;
+.home .section-news .list-article {
+    height: 580px;
 }
 
 /* Territories Tabs Home */
