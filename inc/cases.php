@@ -19,6 +19,59 @@ if ( class_exists( 'CPT' ) ) :
 
 endif;
 
+/**
+ * Print the loop cases
+ */
+function territories_loop_cases( $id, $class = 'col-sm-6' ) {
+    
+    echo '<div class="' . $class . ' cases-list">';
+
+        $args = [
+            'post_type'      => 'cases',
+            'posts_per_page' => 4,
+            'order'          => 'DESC',
+            'post_status'    => 'publish',
+            'meta_query'	=> array(
+                array(
+                    'key'		=> 'what_territories',
+                    'value'		=> $id,
+                    'compare'	=> 'LIKE'
+                )
+            )
+        ];
+
+        $cases = new WP_Query( $args );
+
+        if ( $cases->have_posts() ) :
+
+            if ( $cases->post_count >= 4 ) {
+                echo '<h3>Casos <a href="' . esc_url( home_url() . '/casos?territorio=' ) . $id . '">Veja todos os casos</a></h3>';
+            } else {
+                echo '<h3>Casos</h3>';
+            }
+
+            while ( $cases->have_posts() ) :
+                $cases->the_post();                
+
+                echo '<a href="' . esc_url( get_the_permalink() ) . '">';
+
+                    echo '<div ' . thumbnail_bg() . ' class="col-sm-12 each">';
+                        echo '<h3>' . apply_filters( 'the_title', get_the_title() ) . '</h3>';
+                        $what_territories = get_post_meta( get_the_ID(), 'what_territories' );
+                    echo '</div><!-- /.each -->';
+                        
+                echo '</a>';
+
+            endwhile;
+
+            wp_reset_postdata();
+
+        endif; // Endif $cases->have_posts()
+
+    echo '</div>';
+}
+
+
 if ( ! function_exists( 'cases_pre_get_posts' ) ) {
 
     /**
@@ -44,7 +97,7 @@ if ( ! function_exists( 'cases_pre_get_posts' ) ) {
             return $query;
         }
         
-        // only modify queries for 'event' post type
+        // only modify queries for 'cases' post type
         if ( isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'cases' ) {
             
             // allow the url to alter the query

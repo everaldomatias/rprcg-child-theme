@@ -11,6 +11,11 @@ include_once( 'inc/customizer.php' );
 include_once( 'classes/CPT.php' );
 
 /**
+ * Posts (News)
+ */
+include_once( 'inc/news.php' );
+
+/**
  * CPT Territories (Territórios)
  */
 include_once( 'inc/territories.php' );

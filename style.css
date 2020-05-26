@@ -231,15 +231,16 @@ h6,
     position: relative;
 }
 #territories-print .title a {
-    color: #cccccc;
+    color: #777777;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     margin: 10px 0 0 20px;
     position: absolute;
+    transition: all 0.2s ease-in-out;
 }
 #territories-print .title a:hover {
-    color: #333333;
+    filter: brightness( 50% );
     text-decoration: none;
 }
 #territories-print .summary {
@@ -288,7 +289,22 @@ h6,
     }
 
 }
-
+.single-territories [class*="-list"] h3 {
+    position: relative;
+}
+.single-territories [class*="-list"] h3 a {
+    color: #777777;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 3px 0 0 20px;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+}
+.single-territories [class*="-list"] h3 a:hover {
+    filter: brightness( 50% );
+    text-decoration: none;
+}
 #territories-print .cases-list .each,
 .single-territories .cases-list .each {
     background-color: #888888;
