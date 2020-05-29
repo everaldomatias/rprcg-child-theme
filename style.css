@@ -350,17 +350,27 @@ h6,
 }
 
 /* Territories >> Single */
-.single-territories .entry-header .col-sm-9 {
+.single-territories .entry-header .col-sm-8 {
     padding-left: 0;
 }
 .single-territories .entry-header .entry-meta {
     margin-bottom: 0;
 }
-.single-territories .entry-header .col-sm-3 .nav-links {
+.single-territories .entry-header .col-sm-4 .nav-links {
     clear: inherit;
     float: left;
     margin-bottom: 0;
     width: 50%;
+}
+@media ( max-width: 992px ) {
+    .single-territories .page-header {
+        padding-bottom: 15px;
+    }  
+    .single-territories .entry-header .col-sm-4 {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+    }
 }
 .single-territories #primary {
     border: 0;
