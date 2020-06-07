@@ -350,6 +350,9 @@ h6,
 }
 
 /* Territories >> Single */
+.single-territories {
+    overflow-x: hidden;
+}
 .single-territories .entry-header .col-sm-8 {
     padding-left: 0;
 }
@@ -374,6 +377,7 @@ h6,
 }
 .single-territories #primary {
     border: 0;
+    padding-bottom: 0;
     padding-right: 0;
     width: 100%;
 }
@@ -417,6 +421,14 @@ h6,
 }
 .single-territories .entry-header h2.entry-title a {
     color: #333333 !important;
+}
+
+/* Territories >> Single >> Articles */
+.single-territories .articles-list {
+    background-color: #f8f9f9;
+    margin: 30px -100% 0 !important;
+    padding: 60px 100% !important;
+    width: auto;
 }
 
 /* Downloads */

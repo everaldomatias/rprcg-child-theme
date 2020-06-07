@@ -181,7 +181,7 @@ function territories_print_color_single() {
         $css .= '.page-header a, #content-inside a, #secondary a { color: ' . $color . ' } ';
         $css .= '.page-header .nav-links a { background-color: ' . $color . '; color: #ffffff; } ';
         $css .= '#content-inside #secondary input[type="submit"].search-submit { background: ' . $color . ' !important } ';
-        $css .= 'body.single-territories #content-inside .news-list a.btn { background-color: ' . $color . '; color: #ffffff; }';
+        $css .= 'body.single-territories #content-inside .news-list a.btn, body.single-territories #content-inside .articles-list a.btn { background-color: ' . $color . '; color: #ffffff; }';
         $css .= '</style>';
 
         echo $css;

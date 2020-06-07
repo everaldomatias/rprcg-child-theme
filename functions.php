@@ -21,6 +21,11 @@ include_once( 'inc/news.php' );
 include_once( 'inc/territories.php' );
 
 /**
+ * CPT Articles
+ */
+include_once( 'inc/articles.php' );
+
+/**
  * CPT Courses (Cursos)
  */
 include_once( 'inc/courses.php' );
@@ -34,7 +39,6 @@ include_once( 'inc/cases.php' );
  * CPT Downloads
  */
 include_once( 'inc/downloads.php' );
-
 
 // Functions
 
