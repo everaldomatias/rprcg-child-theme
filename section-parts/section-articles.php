@@ -7,7 +7,7 @@ $coletivo_articles_disable  = get_theme_mod( 'coletivo_articles_disable' ) == 1 
 $coletivo_articles_id       = get_theme_mod( 'coletivo_articles_id', esc_html__( 'articles', 'coletivo' ) );
 $coletivo_articles_title    = get_theme_mod( 'coletivo_articles_title', esc_html__( 'Section Title', 'coletivo' ) );
 $coletivo_articles_subtitle = get_theme_mod( 'coletivo_articles_subtitle', esc_html__( 'Section Subtitle', 'coletivo' ) );
-$coletivo_articles_desc     = get_theme_mod( 'coletivo_articles_desc', esc_html__( 'Section Description', 'coletivo' ) );
+$coletivo_articles_desc     = get_theme_mod( 'coletivo_articles_desc', '' );
 
 if ( coletivo_is_selective_refresh() ) {
     $coletivo_articles_disable = false;
@@ -37,41 +37,37 @@ if ( coletivo_is_selective_refresh() ) {
 				<div class="col-sm-12">
 					<div class="articles-entry wow slideInUp">
 
-                        <div class="articles-list">
+                        <?php
+                        
+                        $args = [
+                            'post_type'      => 'articles',
+                            'posts_per_page' => 3,
+                            'post_status'    => 'publish'
+                        ];
 
-                            <?php
+                        $articles = new WP_Query( $args );
+
+                        if ( $articles->have_posts() ) :
+
+                            while ( $articles->have_posts() ) :
+                                $articles->the_post();
+
+                                get_template_part( 'template-parts/content', 'list' );
                             
-                            $args = [
-                                'post_type'      => 'articles',
-                                'posts_per_page' => 3,
-                                'post_status'    => 'publish'
-                            ];
+                            endwhile;
 
-                            $articles = new WP_Query( $args );
+                            wp_reset_postdata();
 
-                            if ( $articles->have_posts() ) :
-
-                                while ( $articles->have_posts() ) :
-                                    $articles->the_post();
-
-                                    get_template_part( 'template-parts/content', 'list' );
-                                
-                                endwhile;
-
-                                wp_reset_postdata();
-
-                            endif; // Endif $articles->have_posts()
-                            
-                            ?>
-
-                        </div><!-- /.articles-list -->
-
-
-                        <div class="all-articles">
-                            <a class="btn btn-theme-primary btn-lg" href="<?php echo get_post_type_archive_link( 'territorios' ); ?>">Conheça todos Territórios</a>
-                        </div><!-- /.articles -->
+                        endif; // Endif $articles->have_posts()
+                        
+                        ?>
 
 					</div><!-- /.articles-entry -->
+
+                    <div class="all-articles">
+                        <a class="btn btn-theme-primary btn-lg" href="<?php echo get_post_type_archive_link( 'territorios' ); ?>">Conheça todos Territórios</a>
+                    </div><!-- /.articles -->
+
 				</div><!-- /.col-sm-12 -->
 			</div><!-- /.row -->
 
