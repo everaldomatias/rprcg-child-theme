@@ -36,6 +36,11 @@ include_once( 'inc/courses.php' );
 include_once( 'inc/cases.php' );
 
 /**
+ * CPT Events
+ */
+include_once( 'inc/events.php' );
+
+/**
  * CPT Downloads
  */
 include_once( 'inc/downloads.php' );

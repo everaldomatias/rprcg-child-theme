@@ -72,6 +72,8 @@ get_header(); ?>
 
 				<?php territories_loop_articles( get_the_ID(), 'col-sm-12 nopadding' ); ?>
 
+				<?php territories_loop_events( get_the_ID(), 'col-sm-12 nopadding' ); ?>
+
 			</main><!-- #main -->
 		</div><!-- #primary -->
 

@@ -390,7 +390,7 @@ h6,
 .single-territories .news-list .list-article {
     display: block;
     float: left;
-    height: 500px;
+    height: auto;
     padding: 25px 0px;
     width: 33.3%;
 }
