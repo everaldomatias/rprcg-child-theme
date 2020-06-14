@@ -200,6 +200,57 @@ if ( ! function_exists( 'print_events_meta' ) ) {
         }
 
     }
-    //add_action( 'after_entry_header_content_list', 'print_events_meta' );
+
+}
+
+if ( ! function_exists( 'events_pre_get_posts' ) ) {
+
+    /**
+     * 
+     * WordPress function for filter posts Events with GET parameter
+     * 
+     * @author  Everaldo Matias
+     * @link    https://everaldo.dev
+     * 
+     * @version 1.0
+     * @license http://www.opensource.org/licenses/mit-license.html MIT License
+     * 
+     * @see     https://codex.wordpress.org/Class_Reference/WP_Meta_Query
+     * @see     https://developer.wordpress.org/reference/hooks/pre_get_posts
+     * 
+     * @param   string,integer  $id of the attachment
+     * 
+     */
+    function events_pre_get_posts( $query ) {
+        
+        // do not modify queries in the admin
+        if ( is_admin() ) {
+            return $query;
+        }
+        
+        // only modify queries for 'courses' post type
+        if ( isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'events' ) {
+            
+            // allow the url to alter the query
+            if ( isset( $_GET['territorio'] ) ) {
+
+                $meta_query[] = array(
+                    'key'		=> 'what_territories',
+                    'value'		=> sanitize_text_field( $_GET['territorio'] ),
+                    'compare'	=> 'LIKE',
+                );
+
+                // update meta query
+                $query->set( 'meta_query', $meta_query );
+                
+            } 
+            
+        }
+
+        return $query;
+
+    }
+
+    add_action( 'pre_get_posts', 'events_pre_get_posts' );
 
 }
