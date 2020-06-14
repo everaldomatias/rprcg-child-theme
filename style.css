@@ -387,7 +387,7 @@ h6,
     margin-bottom: 30px;
     margin-top: 30px;
 }
-.single-territories .news-list .list-article {
+.single-territories .list-article {
     display: block;
     float: left;
     height: auto;
@@ -430,6 +430,58 @@ h6,
     margin: 30px -100% 0 !important;
     padding: 60px 100% !important;
     width: auto;
+}
+
+/* Events */
+.events-list .list-article {
+    width: 100%;
+}
+@media ( min-width: 768px ) {
+    .events-list .list-article {
+        width: 50%;
+    }
+}
+.events-list .list-article .list-article-thumb {
+    position: relative;
+}
+.events-list .list-article .list-article-thumb .entry-title {
+    bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: absolute;
+    width: 100%;
+}
+.events-list .list-article .list-article-thumb .entry-title a {
+    text-shadow: 0px 0px 5px #000000;
+    color: #ffffff !important;
+}
+.events-list .list-article .list-article-thumb .entry-title a:hover {
+    text-decoration: none;
+}
+.events-list .list-article-meta {
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 20px 0;
+}
+.events-list .list-article-meta > div {
+    display: flex;
+    flex-grow: 1;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.events-list .events-date, 
+.events-list .events-hour, 
+.events-list .events-location {
+    /* float: left;
+    width: 33.3333%; */
+}
+.events-list svg {
+    height: auto;
+    margin-right: 10px;
+    max-width: 20px;
+    width: 100%;
 }
 
 /* Downloads */
