@@ -52,7 +52,7 @@ if ( ! function_exists( 'territories_loop_events' ) ) {
             echo '<div class="' . $class . ' events-list">';
 
                 if ( $posts->post_count >= 2 ) {
-                    echo '<h3>Eventos <a href="' . esc_url( home_url() . '/artigos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
+                    echo '<h3>Eventos <a href="' . esc_url( home_url() . '/eventos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
                 } else {
                     echo '<h3>Eventos</h3>';
                 }            
@@ -100,7 +100,7 @@ if ( ! function_exists( 'territories_loop_events' ) ) {
                 echo '<div class="' . $class . ' events-list old-events-list">';
 
                     if ( $posts->post_count >= 2 ) {
-                        echo '<h3>Eventos Passados <a href="' . esc_url( home_url() . '/artigos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
+                        echo '<h3>Eventos Passados <a href="' . esc_url( home_url() . '/eventos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
                     } else {
                         echo '<h3>Eventos Passados</h3>';
                     }            
