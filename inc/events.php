@@ -207,7 +207,7 @@ if ( ! function_exists( 'events_pre_get_posts' ) ) {
 
     /**
      * 
-     * WordPress function for filter posts Events with GET parameter
+     * WordPress function for filter posts Events with GET parameter in archive
      * 
      * @author  Everaldo Matias
      * @link    https://everaldo.dev
@@ -228,7 +228,7 @@ if ( ! function_exists( 'events_pre_get_posts' ) ) {
             return $query;
         }
         
-        // only modify queries for 'courses' post type
+        // only modify queries for 'events' post type
         if ( isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'events' ) {
             
             // allow the url to alter the query
@@ -243,7 +243,24 @@ if ( ! function_exists( 'events_pre_get_posts' ) ) {
                 // update meta query
                 $query->set( 'meta_query', $meta_query );
                 
-            } 
+            } elseif ( is_post_type_archive( 'events' ) ) {
+
+                // update query
+                $query->set( 'meta_key', 'events_date' );
+                $query->set( 'orderby', 'meta_value_num' );
+                $query->set( 'order', 'ASC' );
+                
+                $meta_query[] = array(
+                    'key'     => 'events_date',
+                    'compare' => '>=',
+                    'value'   => date( 'Ymd' ),
+                    'type'    => 'DATE'
+                );
+
+                // update meta query
+                $query->set( 'meta_query', $meta_query );
+
+            }
             
         }
 
