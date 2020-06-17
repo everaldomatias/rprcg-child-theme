@@ -48,6 +48,8 @@ get_header(); ?>
 
 				<?php endif; ?>
 
+				<?php territories_loop_past_events( 'col-sm-12 nopadding' ); ?>
+
 			</main><!-- #main -->
 		</div><!--#content-inside -->
 	</div><!-- #content -->

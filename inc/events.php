@@ -124,6 +124,53 @@ if ( ! function_exists( 'territories_loop_events' ) ) {
     
 }
 
+if ( ! function_exists( 'territories_loop_past_events' ) ) {
+
+    function territories_loop_past_events( $class = 'col-sm-6' ) {
+
+        $args = [
+            'post_type'      => 'events',
+            'posts_per_page' => 12,
+            'post_status'    => 'publish',
+            'meta_key'       => 'events_date',
+            'orderby'        => 'meta_value_num',
+            'order'          => 'ASC',
+            'meta_query'     => array(
+                array(
+                    'key'     => 'events_date',
+                    'compare' => '<',
+                    'value'   => date( 'Ymd' ),
+                    'type'    => 'DATE'
+                )
+            )
+        ];
+
+        $posts = new WP_Query( $args );
+
+        // Past events
+        if ( $posts->have_posts() ) :
+
+            echo '<div class="' . $class . ' events-list past-events-list">';
+
+                echo '<h3>Eventos Passados</h3>';     
+
+                while ( $posts->have_posts() ) :
+                    $posts->the_post();                
+
+                    get_template_part( 'template-parts/content', 'event' );
+
+                endwhile;
+            
+                wp_reset_postdata();
+
+            echo '</div><!-- /.events-list.past-events-list -->';
+        
+        endif; // Endif $posts->have_posts()
+
+    }
+    
+}
+
 if ( ! function_exists( 'print_events_meta' ) ) {
 
     function print_events_meta() {
@@ -229,7 +276,7 @@ if ( ! function_exists( 'events_pre_get_posts' ) ) {
         }
         
         // only modify queries for 'events' post type
-        if ( isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'events' ) {
+        if ( $query->is_main_query() && isset( $query->query_vars['post_type'] ) && $query->query_vars['post_type'] == 'events' ) {
             
             // allow the url to alter the query
             if ( isset( $_GET['territorio'] ) ) {
