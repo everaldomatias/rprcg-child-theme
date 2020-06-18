@@ -144,19 +144,19 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
 
         $args = [
             'post_type'      => 'events',
-            'posts_per_page' => 12,
+            'posts_per_page' => 2,
             'post_status'    => 'publish',
             'meta_key'       => 'events_date',
             'orderby'        => 'meta_value_num',
-            'order'          => 'ASC',
-            'meta_query'     => array(
-                array(
+            'order'          => 'DESC',
+            'meta_query'     => [
+                [
                     'key'     => 'events_date',
                     'compare' => '<',
                     'value'   => date( 'Ymd' ),
                     'type'    => 'DATE'
-                )
-            )
+                ]
+            ]
         ];
 
         $posts = new WP_Query( $args );
@@ -176,6 +176,10 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
                 endwhile;
             
                 wp_reset_postdata();
+
+                echo '<div class="link-all-past-events">';
+                    echo '<a class="btn btn-theme-primary btn-sm" href="' . esc_url( home_url() ) . '/arquivo/passados/">Veja todos eventos passados</a>';
+                echo '</div><!-- /.link-all-past-events -->';
 
             echo '</div><!-- /.events-list.past-events-list -->';
         

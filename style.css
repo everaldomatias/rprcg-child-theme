@@ -488,6 +488,10 @@ h6,
 .post-type-archive-events .events-list .list-article {
     margin-bottom: 30px;
 }
+.link-all-past-events {
+    margin: 30px auto;
+    text-align: center;
+}
 
 /* Downloads */
 
