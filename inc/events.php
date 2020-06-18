@@ -335,7 +335,7 @@ if ( ! function_exists( 'events_pre_get_posts' ) ) {
 
 /**
  * 
- * Add a new interval of a day
+ * Add WP cron event to add taxonomy term on past events
  * 
  * @see http://codex.wordpress.org/Plugin_API/Filter_Reference/cron_schedules
  * @see https://codex.wordpress.org/Easier_Expression_of_Time_Constants
@@ -361,49 +361,56 @@ if ( ! wp_next_scheduled( 'events_cron_action' ) ) {
 
 }
  
-// Hook into that action that'll fire twicedaily
-add_action( 'events_cron_action', 'events_set_past_posts' );
+if ( ! function_exists( 'events_set_past_posts' ) ) {
 
-function events_set_past_posts() {
-    /**
-     * @todo Loop de eventos passados sem tax term past
-     * @todo Set tax term past
-     */
+    // Hook into that action that'll fire twicedaily
+    add_action( 'events_cron_action', 'events_set_past_posts' );
 
-    $args = [
-        'post_type'      => 'events',
-        'posts_per_page' => -1,
-        'post_status'    => 'publish',
-        'meta_key'       => 'events_date',
-        'meta_query'     => array(
-            array(
-                'key'     => 'events_date',
-                'compare' => '<',
-                'value'   => date( 'Ymd' ),
-                'type'    => 'DATE'
-            )
-        )
-    ];
+    function events_set_past_posts() {
 
-    $posts = new WP_Query( $args );
+        $args = [
+            'post_type'      => 'events',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'tax_query' => [
+                [
+                    'taxonomy' => 'event_terms',
+                    'field'    => 'slug',
+                    'terms'    => 'passados',
+                    'operator' => 'NOT EXISTS',
+                ]
+            ],
+            'meta_key'       => 'events_date',
+            'meta_query'     => [
+                [
+                    'key'     => 'events_date',
+                    'compare' => '<',
+                    'value'   => date( 'Ymd' ),
+                    'type'    => 'DATE'
+                ]
+            ]
+        ];
 
-    // Past events
-    if ( $posts->have_posts() ) :
+        $posts = new WP_Query( $args );
 
-        $term = term_exists( 'Passados', 'event_terms' ); 
-        if ( $term == 0 && $term == null  ) {
-            wp_insert_term( 'Passados', 'event_terms', ['slug' => 'passados'] );
-        }
+        if ( $posts->have_posts() ) :
+
+            $term = term_exists( 'Passados', 'event_terms' ); 
+            if ( $term == 0 && $term == null ) {
+                wp_insert_term( 'Passados', 'event_terms', ['slug' => 'passados'] );
+            }
+            
+            while ( $posts->have_posts() ) :
+                $posts->the_post();
+
+                $wp_set_object_terms = wp_set_object_terms( get_the_ID(), 'passados', 'event_terms' );
+            
+            endwhile;
         
-        while ( $posts->have_posts() ) :
-            $posts->the_post();
+            wp_reset_postdata();
 
-            $wp_set_object_terms = wp_set_object_terms( get_the_ID(), 'passados', 'event_terms' );
-        
-        endwhile;
-    
-        wp_reset_postdata();
+        endif;
 
-    endif;
+    }
 
 }
