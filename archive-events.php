@@ -25,6 +25,10 @@ get_header(); ?>
 		<div id="content-inside" class="container">
 			<main id="main" class="site-main events-list" role="main">
 
+				<?php
+				// Pagination
+				$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1; ?>
+				
 				<?php if ( have_posts() ) : ?>
 
 					<?php while ( have_posts() ) : the_post(); ?>
@@ -48,8 +52,13 @@ get_header(); ?>
 
 				<?php endif; ?>
 
-				<?php territories_loop_past_events( 'col-sm-12 nopadding' ); ?>
+				<?php
 
+				// Only first page
+				if ( $paged <= 1 ) {
+					territories_loop_past_events( 'col-sm-12 nopadding' );
+				} ?>
+			
 			</main><!-- #main -->
 		</div><!--#content-inside -->
 	</div><!-- #content -->
