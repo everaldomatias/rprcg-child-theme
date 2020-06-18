@@ -17,6 +17,20 @@ if ( class_exists( 'CPT' ) ) :
 
     $events->menu_icon( 'dashicons-calendar-alt' );
 
+    $events->register_taxonomy( [
+        'taxonomy_name'      => 'event_terms',
+        'singular'           => 'Categoria',
+        'plural'             => 'Categorias',
+        'slug'               => 'arquivo'
+    ], [
+        // 'public'             => false,
+        // 'publicly_queryable' => true,
+        // 'show_admin_column'  => false,
+        // 'show_in_quick_edit' => false,
+        // 'show_ui'            => false,
+        // 'show_in_menu'       => false
+    ] );
+
 endif;
 
 if ( ! function_exists( 'territories_loop_events' ) ) {
@@ -316,5 +330,80 @@ if ( ! function_exists( 'events_pre_get_posts' ) ) {
     }
 
     add_action( 'pre_get_posts', 'events_pre_get_posts' );
+
+}
+
+/**
+ * 
+ * Add a new interval of a day
+ * 
+ * @see http://codex.wordpress.org/Plugin_API/Filter_Reference/cron_schedules
+ * @see https://codex.wordpress.org/Easier_Expression_of_Time_Constants
+ * 
+ */
+
+add_filter( 'cron_schedules', 'events_add_cron_schedule' );
+function events_add_cron_schedule( $schedules ) {
+    
+    $schedules['twicedaily'] = array(
+        'interval' => 43200, // 12 hours in seconds
+        'display'  => __( 'Twice a day' ),
+    );
+ 
+    return $schedules;
+
+}
+ 
+// Schedule an action if it's not already scheduled
+if ( ! wp_next_scheduled( 'events_cron_action' ) ) {
+
+    wp_schedule_event( time(), 'twicedaily', 'events_cron_action' );
+
+}
+ 
+// Hook into that action that'll fire twicedaily
+add_action( 'events_cron_action', 'events_set_past_posts' );
+
+function events_set_past_posts() {
+    /**
+     * @todo Loop de eventos passados sem tax term past
+     * @todo Set tax term past
+     */
+
+    $args = [
+        'post_type'      => 'events',
+        'posts_per_page' => -1,
+        'post_status'    => 'publish',
+        'meta_key'       => 'events_date',
+        'meta_query'     => array(
+            array(
+                'key'     => 'events_date',
+                'compare' => '<',
+                'value'   => date( 'Ymd' ),
+                'type'    => 'DATE'
+            )
+        )
+    ];
+
+    $posts = new WP_Query( $args );
+
+    // Past events
+    if ( $posts->have_posts() ) :
+
+        $term = term_exists( 'Passados', 'event_terms' ); 
+        if ( $term == 0 && $term == null  ) {
+            wp_insert_term( 'Passados', 'event_terms', ['slug' => 'passados'] );
+        }
+        
+        while ( $posts->have_posts() ) :
+            $posts->the_post();
+
+            $wp_set_object_terms = wp_set_object_terms( get_the_ID(), 'passados', 'event_terms' );
+        
+        endwhile;
+    
+        wp_reset_postdata();
+
+    endif;
 
 }
