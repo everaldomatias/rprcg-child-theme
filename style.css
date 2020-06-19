@@ -434,6 +434,8 @@ h6,
 
 /* Events */
 .events-list .list-article {
+    height: auto;
+    margin-bottom: 30px;
     width: 100%;
 }
 @media ( min-width: 768px ) {
@@ -490,7 +492,9 @@ h6,
 }
 .link-all-past-events {
     margin: 30px auto;
+    overflow: hidden;
     text-align: center;
+    width: 100%;
 }
 
 /* Downloads */

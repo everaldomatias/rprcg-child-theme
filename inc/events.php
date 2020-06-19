@@ -142,21 +142,32 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
 
     function territories_loop_past_events( $class = 'col-sm-6' ) {
 
+        $what_territories = null;
+        if ( isset( $_GET['territorio'] ) ) {
+            $what_territories = sanitize_text_field( $_GET['territorio'] );
+        }
+
         $args = [
             'post_type'      => 'events',
-            'posts_per_page' => 2,
+            'posts_per_page' => -1,
             'post_status'    => 'publish',
-            'meta_key'       => 'events_date',
-            'orderby'        => 'meta_value_num',
-            'order'          => 'DESC',
+            'tax_query' => [
+                [
+                'taxonomy' => 'event_terms',
+                'field'    => 'slug',
+                'terms'    => 'passados',
+                'operator' => 'EXISTS'
+                ]
+            ],
             'meta_query'     => [
                 [
-                    'key'     => 'events_date',
-                    'compare' => '<',
-                    'value'   => date( 'Ymd' ),
-                    'type'    => 'DATE'
+                'key'		=> 'what_territories',
+                'value'		=> $what_territories,
+                'compare'	=> 'LIKE'
                 ]
             ]
+
+
         ];
 
         $posts = new WP_Query( $args );
