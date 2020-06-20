@@ -47,63 +47,87 @@ include_once( 'inc/downloads.php' );
 
 // Functions
 
-/**
- * 
- * Function get_excerpt
- * 
- * @author Everaldo Matias
- * @link https://everaldo.dev
- *
- * @since  0.1
- *
- * @param  string $content with text to excerpt.
- * @param  string $limit number of the limit.
- * @param  string $after with element to print in end excerpt.
- *
- * @return string
- * 
- */
- 
-function get_excerpt( $content = '', $limit = '', $after = '' ) {
-	
-	if ( $limit ) {
-		$l = $limit;
-	} else {
-		$l = '140';
-	}
- 
-	if ( $content ) {
-		$excerpt = $content;
-	} else {
-		$excerpt = get_the_content();
-	}
- 
-	$excerpt = preg_replace( " (\[.*?\])",'', $excerpt );
-	$excerpt = strip_shortcodes( $excerpt );
-	$excerpt = strip_tags( $excerpt );
-	$excerpt = substr( $excerpt, 0, $l );
-	$excerpt = substr( $excerpt, 0, strripos( $excerpt, " " ) );
-	$excerpt = trim( preg_replace( '/\s+/', ' ', $excerpt ) );
-	
-	if ( $after ) {
-		$a = $after;
-	} else {
-		$a = '...';
-	}
- 
-	$excerpt = $excerpt . $a;
-	return $excerpt;
+if ( ! function_exists( 'get_excerpt' ) ) {
+
+    /**
+     * 
+     * Function get_excerpt
+     * 
+     * @author Everaldo Matias
+     * @link https://everaldo.dev
+     *
+     * @since  0.1
+     *
+     * @param  string $content with text to excerpt.
+     * @param  string $limit number of the limit.
+     * @param  string $after with element to print in end excerpt.
+     *
+     * @return string
+     * 
+     */
+    function get_excerpt( $content = '', $limit = '', $after = '' ) {
+        
+        if ( $limit ) {
+            $l = $limit;
+        } else {
+            $l = '140';
+        }
+    
+        if ( $content ) {
+            $excerpt = $content;
+        } else {
+            $excerpt = get_the_content();
+        }
+    
+        $excerpt = preg_replace( " (\[.*?\])",'', $excerpt );
+        $excerpt = strip_shortcodes( $excerpt );
+        $excerpt = strip_tags( $excerpt );
+        $excerpt = substr( $excerpt, 0, $l );
+        $excerpt = substr( $excerpt, 0, strripos( $excerpt, " " ) );
+        $excerpt = trim( preg_replace( '/\s+/', ' ', $excerpt ) );
+        
+        if ( $after ) {
+            $a = $after;
+        } else {
+            $a = '...';
+        }
+    
+        $excerpt = $excerpt . $a;
+        return $excerpt;
+    }
+
 }
 
+if ( ! function_exists( 'thumbnail_bg' ) ) {
 
-/**
- * 
- */
-function thumbnail_bg( $size = 'thumbnail' ) {
-	global $post;
-	$get_post_thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $size, false, '' );
-	return 'style="background-image: url(' . esc_url( $get_post_thumbnail[0] ) . ' )"';
+    
+    /**
+     * 
+     * Function to print thumbnail on bg div
+     * 
+     * @author  Everaldo Matias
+     * @link    https://everaldo.dev
+     * 
+     * @version 1.0
+     * @license http://www.opensource.org/licenses/mit-license.html MIT License
+     * 
+     * @see     https://developer.wordpress.org/reference/functions/wp_get_attachment_image_src/
+     * @see     https://developer.wordpress.org/reference/functions/get_post_thumbnail_id/
+     * @see     https://brasa.art.br/post-thumbnail-como-background/
+     * 
+     * @param   string,integer  $size of the thumbnail
+     * 
+     */
+    function thumbnail_bg( $size = 'thumbnail' ) {
+        
+        global $post;
+        $get_post_thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $size, false, '' );
+        
+        return 'style="background-image: url(' . esc_url( $get_post_thumbnail[0] ) . ' )"';
+    }
+
 }
+
 
 if ( ! function_exists( 'the_file_size' ) ) {
 
@@ -174,4 +198,3 @@ if ( ! function_exists( 'filter_get_the_archive_title' ) ) {
 	add_filter( 'get_the_archive_title', 'filter_get_the_archive_title' );
 
 }
-	
