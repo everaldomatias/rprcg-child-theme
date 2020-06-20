@@ -15,8 +15,8 @@ get_header(); ?>
 			<div class="container">
 				<?php the_archive_title( '<h1 class="page-title">', '</h1>' ); ?>
 				<?php the_archive_description( '<div class="taxonomy-description">', '</div>' ); ?>
-			</div><!-- container -->
-		</div><!-- page-header -->
+			</div><!-- /.container -->
+		</div><!-- /.page-header -->
 
 		<?php if ( function_exists( 'coletivo_breadcrumb' ) ) : ?>
 			<?php echo coletivo_breadcrumb(); ?>
@@ -48,8 +48,8 @@ get_header(); ?>
 
 				<?php endif; ?>
 
-			</main><!-- #main -->
-		</div><!--#content-inside -->
-	</div><!-- #content -->
+			</main><!-- /.#main -->
+		</div><!--/.#content-inside -->
+	</div><!-- /.#content -->
 
-<?php get_footer(); ?>
+<?php get_footer();

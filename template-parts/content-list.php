@@ -23,28 +23,29 @@
 	</div><!-- /.list-article-thumb -->
 
 	<div class="list-article-content">
+		
 		<div class="list-article-meta">
 			<?php the_category(' / '); ?>
-		</div>
+		</div><!-- /.list-article-meta -->
 
         <header class="entry-header">
 			<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-		</header><!-- .entry-header -->
+		</header><!-- /.entry-header -->
 
         <?php do_action( 'after_entry_header_content_list' ); ?>
 
 		<div class="entry-excerpt">
-			<?php
-				the_excerpt();
-			?>
+			<?php the_excerpt(); ?>
 			<?php
 				wp_link_pages( array(
 					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'coletivo' ),
 					'after'  => '</div>',
 				) );
 			?>
-		</div><!-- .entry-content -->
-        <a class="btn btn-theme-primary btn-sm" href="<?php echo esc_url( get_the_permalink() ); ?>">Veja mais</a>
+		</div><!-- /.entry-content -->
+
+        <a class="btn btn-theme-primary btn-sm" href="<?php echo esc_url( get_the_permalink() ); ?>"><?php _e( 'Veja mais', 'coletivo' ); ?></a>
+
 	</div><!-- /.list-article-content -->
 
-</article><!-- #post-## -->
+</article><!-- /#post-## -->

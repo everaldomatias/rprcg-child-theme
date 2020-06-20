@@ -128,7 +128,6 @@ if ( ! function_exists( 'thumbnail_bg' ) ) {
 
 }
 
-
 if ( ! function_exists( 'the_file_size' ) ) {
 
     /**

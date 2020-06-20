@@ -66,9 +66,9 @@ if ( ! function_exists( 'territories_loop_events' ) ) {
             echo '<div class="' . $class . ' events-list">';
 
                 if ( $posts->post_count >= 2 ) {
-                    echo '<h3>Eventos <a href="' . esc_url( home_url() . '/eventos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
+                    echo '<h3>' . __( 'Eventos', 'coletivo' ) . ' <a href="' . esc_url( home_url() . '/eventos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
                 } else {
-                    echo '<h3>Eventos</h3>';
+                    echo '<h3>' . __( 'Eventos', 'coletivo' ) . '</h3>';
                 }            
 
                 while ( $posts->have_posts() ) :
@@ -114,9 +114,9 @@ if ( ! function_exists( 'territories_loop_events' ) ) {
                 echo '<div class="' . $class . ' events-list old-events-list">';
 
                     if ( $posts->post_count >= 2 ) {
-                        echo '<h3>Eventos Passados <a href="' . esc_url( home_url() . '/eventos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
+                        echo '<h3>' . __( 'Eventos Passados', 'coletivo' ) . ' <a href="' . esc_url( home_url() . '/eventos?territorio=' ) . $id . '">Veja todos eventos</a></h3>';
                     } else {
-                        echo '<h3>Eventos Passados</h3>';
+                        echo '<h3>' . __( 'Eventos Passados', 'coletivo' ) . '</h3>';
                     }            
 
                     while ( $posts->have_posts() ) :
@@ -167,7 +167,6 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
                 ]
             ]
 
-
         ];
 
         $posts = new WP_Query( $args );
@@ -177,7 +176,7 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
 
             echo '<div class="' . $class . ' events-list past-events-list">';
 
-                echo '<h3>Eventos Passados</h3>';     
+                echo '<h3>' . __( 'Eventos Passados', 'coletivo' ) . '</h3>';     
 
                 while ( $posts->have_posts() ) :
                     $posts->the_post();                
@@ -189,7 +188,7 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
                 wp_reset_postdata();
 
                 echo '<div class="link-all-past-events">';
-                    echo '<a class="btn btn-theme-primary btn-sm" href="' . esc_url( home_url() ) . '/arquivo/passados/">Veja todos eventos passados</a>';
+                    echo '<a class="btn btn-theme-primary btn-sm" href="' . esc_url( home_url() ) . '/arquivo/passados/">' . __( 'Veja todos os eventos passados', 'coletivo' ) . '</a>';
                 echo '</div><!-- /.link-all-past-events -->';
 
             echo '</div><!-- /.events-list.past-events-list -->';
@@ -231,8 +230,7 @@ if ( ! function_exists( 'print_events_meta' ) ) {
                     echo ' a ' . esc_html( $events_date_end );
 
                 }
-
-                echo '</div>';
+                echo '</div><!-- /.events-date -->';
 
             }
 
@@ -242,7 +240,7 @@ if ( ! function_exists( 'print_events_meta' ) ) {
                 echo '<div class="events-hour">';
                 echo '<svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><g><path d="m256 512c-68.38 0-132.667-26.629-181.02-74.98-48.351-48.353-74.98-112.64-74.98-181.02s26.629-132.667 74.98-181.02c48.353-48.351 112.64-74.98 181.02-74.98s132.667 26.629 181.02 74.98c48.351 48.353 74.98 112.64 74.98 181.02s-26.629 132.667-74.98 181.02c-48.353 48.351-112.64 74.98-181.02 74.98zm0-482c-60.367 0-117.12 23.508-159.806 66.194s-66.194 99.439-66.194 159.806 23.508 117.12 66.194 159.806 99.439 66.194 159.806 66.194 117.12-23.508 159.806-66.194 66.194-99.439 66.194-159.806-23.508-117.12-66.194-159.806-99.439-66.194-159.806-66.194z"/></g><g><path d="m241 60.036h30v40.032h-30z"/></g><g><path d="m360.398 116.586h40.032v30h-40.032z" transform="matrix(.707 -.707 .707 .707 18.375 307.534)"/></g><g><path d="m411.932 241h40.032v30h-40.032z"/></g><g><path d="m365.414 360.398h30v40.032h-30z" transform="matrix(.707 -.707 .707 .707 -157.573 380.414)"/></g><g><path d="m241 411.932h30v40.032h-30z"/></g><g><path d="m111.57 365.414h40.032v30h-40.032z" transform="matrix(.707 -.707 .707 .707 -230.453 204.466)"/></g><g><path d="m60.036 241h40.032v30h-40.032z"/></g><g><path d="m116.586 111.57h30v40.032h-30z" transform="matrix(.707 -.707 .707 .707 -54.505 131.586)"/></g><g><path d="m361.892 271h-120.892v-120.892h30v90.892h90.892z"/></g></g></svg>';
                 echo '<div>' . esc_html( $events_hour_alternative ) . '</div>';
-                echo '</div>';
+                echo '</div><!-- /.events-hour -->';
 
             } elseif ( isset( $events_hour ) && ! empty( $events_hour ) ) {
 
@@ -257,10 +255,10 @@ if ( ! function_exists( 'print_events_meta' ) ) {
                     $events_hour_end_timestamp = strtotime( $events_hour_end );
                     $events_hour_end = date( "G:i", $events_hour_end_timestamp );
 
-                    echo ' às ' . esc_html( $events_hour_end );
+                    echo ' ' . __( 'às', 'coletivo' ) . ' ' . esc_html( $events_hour_end );
 
                 }
-                echo '</div>';
+                echo '</div><!-- /.events-hour -->';
 
             }
 
@@ -269,7 +267,7 @@ if ( ! function_exists( 'print_events_meta' ) ) {
                 
                 echo '<div class="events-location"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 0C156.7 0 76 80.7 76 180c0 33.5 9.3 66.3 26.9 94.7l142.9 230.3c2.7 4.4 7.6 7.1 12.7 7.1 0 0 0.1 0 0.1 0 5.2 0 10.1-2.8 12.8-7.3L410.6 272.2C427.2 244.4 436 212.5 436 180 436 80.7 355.3 0 256 0zM384.9 256.8L258.3 468.2l-129.9-209.3C113.7 235.2 105.8 208 105.8 180c0-82.7 67.5-150.2 150.2-150.2S406.1 97.3 406.1 180C406.1 207.1 398.7 233.7 384.9 256.8z"/><path d="M256 90c-49.6 0-90 40.4-90 90 0 49.3 39.7 90 90 90 50.9 0 90-41.2 90-90C346 130.4 305.6 90 256 90zM256 240.2c-33.3 0-60.2-27-60.2-60.2 0-33.1 27.1-60.2 60.2-60.2s60.1 27.1 60.1 60.2C316.1 212.7 289.8 240.2 256 240.2z"/></svg>';
                 echo esc_html( $events_local );
-                echo '</div>';
+                echo '</div><!-- /.events-location -->';
 
             }
             

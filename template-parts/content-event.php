@@ -21,10 +21,9 @@
 	</div><!-- /.list-article-thumb -->
 
 	<div class="list-article-content">
+
 		<div class="list-article-meta">
-		
 			<?php print_events_meta(); ?>
-			
 		</div><!-- /.list-article-meta -->
 
         <?php do_action( 'after_entry_header_content_list' ); ?>
@@ -36,4 +35,4 @@
         <a class="btn btn-theme-primary btn-sm" href="<?php echo esc_url( get_the_permalink() ); ?>">Veja mais</a>
 	</div><!-- /.list-article-content -->
 
-</article><!-- #post-## -->
+</article><!-- /#post-## -->

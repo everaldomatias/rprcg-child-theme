@@ -14,8 +14,8 @@ get_header(); ?>
 		<div class="page-header">
 			<div class="container">
                 <h1 class="page-title">Downloads</h1>
-			</div><!-- container -->
-		</div><!-- page-header -->
+			</div><!-- /.container -->
+		</div><!-- /.page-header -->
 
 		<?php if ( function_exists( 'coletivo_breadcrumb' ) ) : ?>
 			<?php echo coletivo_breadcrumb(); ?>
@@ -37,15 +37,18 @@ get_header(); ?>
                                 } else {
                                     echo '<img alt="" src="'. get_template_directory_uri() . '/assets/images/placholder2.png' .'">';
                                 } ?>
-                            </div>
+                            </div><!-- /.list-article-thumb -->
 
                             <div class="list-article-content col-sm-8">
+                                
                                 <header class="entry-header">
                                     <h2 class="entry-title"><?php the_title(); ?></h2>
-                                </header><!-- .entry-header -->
+                                </header><!-- /.entry-header -->
+                                
                                 <div class="entry-content">
                                     <?php the_content(); ?>
-                                </div><!-- .entry-content -->
+                                </div><!-- /.entry-content -->
+                                
                                 <div class="entry-file">
                                     <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/file.png" alt="Download file">
                                     <?php
@@ -55,9 +58,10 @@ get_header(); ?>
                                     the_file_size( $file_id );
                                     echo ')</a>'; ?>
                                 </div><!-- /.entry-file -->
-                            </div>
+                                
+                            </div><!-- /.list-article-content -->
 
-                        </article><!-- #post-## -->                        
+                        </article><!-- /#post-## -->                        
 
 					<?php endwhile; ?>
 
@@ -73,4 +77,4 @@ get_header(); ?>
 		</div><!--#content-inside -->
 	</div><!-- #content -->
 
-<?php get_footer(); ?>
+<?php get_footer();

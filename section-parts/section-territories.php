@@ -55,8 +55,6 @@ if ( coletivo_is_selective_refresh() ) {
 
                                 $count = 0;
 
-                                /*  */
-
                                 while ( $territories->have_posts() ) :
                                     $territories->the_post();
 
@@ -70,20 +68,17 @@ if ( coletivo_is_selective_refresh() ) {
                                     } else {
                                         $class = 'off';
                                     } ?>
-                                    <a style="background-color: <?php echo $color; ?>;" data-idpost="<?php echo( basename( get_permalink() ) ); ?>" class="buttons-sections <?php echo $class; ?>" onclick="apfaddpost( <?php echo get_the_ID(); ?> );" ><?php the_title(); ?></a>		
+                                    <a style="background-color: <?php echo esc_attr( $color ); ?>;" data-idpost="<?php echo( basename( get_permalink() ) ); ?>" class="buttons-sections <?php echo $class; ?>" onclick="apfaddpost( <?php echo get_the_ID(); ?> );" ><?php the_title(); ?></a>		
                                     
-
                                 <?php endwhile;
 
                                 wp_reset_postdata();
 
                             endif; // Endif $territories->have_posts()
                             
-                            
                             ?>
 
                         </div><!-- /.territories-list -->
-
 
                         <div id="territories-print" class="row">
                             <?php territories_return_html( $first ); ?>

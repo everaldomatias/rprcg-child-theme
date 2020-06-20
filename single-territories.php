@@ -14,18 +14,20 @@ get_header(); ?>
 	<?php if ( has_post_thumbnail() && $img = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true ) ) : ?>
 		<div class="page-fullheader">
 			<img src="<?php echo esc_url( $img[0] ); ?>" alt="<?php the_title(); ?>">
-		</div><!-- .page-fullheader -->
+		</div><!-- /.page-fullheader -->
 	<?php endif; ?>
 	
 	<div class="page-header">
 		<div class="container">
 			<header class="entry-header">
+				
 				<div class="col-sm-8">
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<div class="entry-meta">
 						<?php coletivo_posted_on(); ?>
 					</div><!-- .entry-meta -->	
 				</div>
+
 				<div class="col-sm-4">
 
 					<?php if ( get_previous_post() ) { ?>
@@ -45,9 +47,10 @@ get_header(); ?>
 					<?php } ?>
 					
 				</div>
-			</header><!-- .entry-header -->
-		</div><!-- .container -->
-	</div><!-- .page-header -->
+
+			</header><!-- /.entry-header -->
+		</div><!-- /.container -->
+	</div><!-- /.page-header -->
 
 	<div id="content-inside" class="container right-sidebar">
 
@@ -62,23 +65,19 @@ get_header(); ?>
 						comments_template();
 					endif;
 				endwhile; // End of the loop.
-                ?>
                 
-                <?php territories_loop_cases( get_the_ID(), 'col-sm-12 nopadding' ); ?>
+				// Aditional loops
+				territories_loop_cases( get_the_ID(), 'col-sm-12 nopadding' );
+				territories_loop_courses( get_the_ID(), 'col-sm-12 nopadding' );
+				territories_loop_news( get_the_ID(), 'col-sm-12 nopadding' );
+				territories_loop_articles( get_the_ID(), 'col-sm-12 nopadding' );
+				territories_loop_events( get_the_ID(), 'col-sm-12 nopadding' ); ?>
 
-                <?php territories_loop_courses( get_the_ID(), 'col-sm-12 nopadding' ); ?>
+			</main><!-- /#main -->
+		</div><!-- /#primary -->
 
-                <?php territories_loop_news( get_the_ID(), 'col-sm-12 nopadding' ); ?>
+	</div><!-- /#content-inside -->
 
-				<?php territories_loop_articles( get_the_ID(), 'col-sm-12 nopadding' ); ?>
-
-				<?php territories_loop_events( get_the_ID(), 'col-sm-12 nopadding' ); ?>
-
-			</main><!-- #main -->
-		</div><!-- #primary -->
-
-	</div><!-- #content-inside -->
-
-</div><!-- #content -->
+</div><!-- /#content -->
 
 <?php get_footer();

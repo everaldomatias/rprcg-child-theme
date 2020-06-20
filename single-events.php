@@ -14,7 +14,7 @@ get_header(); ?>
 	<?php if ( has_post_thumbnail() && $img = wp_get_attachment_image_src( get_post_thumbnail_id(), 'full', true ) ) : ?>
 		<div class="page-fullheader">
 			<img src="<?php echo esc_url( $img[0] ); ?>" alt="<?php the_title(); ?>">
-		</div><!-- .page-fullheader -->
+		</div><!-- /.page-fullheader -->
 	<?php endif; ?>
 	
 	<div class="page-header">
@@ -24,7 +24,7 @@ get_header(); ?>
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<div class="entry-meta">
 						<?php coletivo_posted_on(); ?>
-					</div><!-- .entry-meta -->	
+					</div><!-- /.entry-meta -->	
 				</div>
 				<div class="col-sm-4">
 					<div class="nav-previous nav-links">
@@ -34,9 +34,9 @@ get_header(); ?>
 						<?php next_post_link( '%link', __( 'Next <i class="fa fa-caret-right" aria-hidden="true"></i>', 'coletivo' ) ); ?>
 					</div>
 				</div>
-			</header><!-- .entry-header -->
-		</div><!-- .container -->
-	</div><!-- .page-header -->
+			</header><!-- /.entry-header -->
+		</div><!-- /.container -->
+	</div><!-- /.page-header -->
 
 	<div id="content-inside" class="container right-sidebar">
 
@@ -58,13 +58,13 @@ get_header(); ?>
 				endwhile; // End of the loop.
 				?>
 
-			</main><!-- #main -->
-		</div><!-- #primary -->
+			</main><!-- /#main -->
+		</div><!-- /#primary -->
 
 		<?php get_sidebar( 'sidebar-1' ); ?>
 
-	</div><!-- #content-inside -->
+	</div><!-- /#content-inside -->
 
-</div><!-- #content -->
+</div><!-- /#content -->
 
 <?php get_footer();
