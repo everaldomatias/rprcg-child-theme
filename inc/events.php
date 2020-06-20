@@ -23,15 +23,32 @@ if ( class_exists( 'CPT' ) ) :
         'plural'             => 'Categorias',
         'slug'               => 'arquivo'
     ], [
-        // 'public'             => false,
-        // 'publicly_queryable' => true,
-        // 'show_admin_column'  => false,
-        // 'show_in_quick_edit' => false,
-        // 'show_ui'            => false,
-        // 'show_in_menu'       => false
+        'public'             => false,
+        'publicly_queryable' => true,
+        'show_admin_column'  => false,
+        'show_in_quick_edit' => false,
+        'show_ui'            => false,
+        'show_in_menu'       => false
     ] );
 
 endif;
+
+if ( ! function_exists( 'events_remove_admin_columns' ) ) {
+
+    /**
+     * Remove default column to Event post type
+     */
+    function events_remove_admin_columns( $columns ) {
+
+        if ( isset( $columns['event_terms'] ) )
+            unset( $columns['event_terms'] );
+
+        return $columns;
+
+    }
+    add_filter( 'manage_edit-events_columns', 'events_remove_admin_columns' );
+
+}
 
 if ( ! function_exists( 'territories_loop_events' ) ) {
 
