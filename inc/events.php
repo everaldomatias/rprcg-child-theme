@@ -149,7 +149,7 @@ if ( ! function_exists( 'territories_loop_past_events' ) ) {
 
         $args = [
             'post_type'      => 'events',
-            'posts_per_page' => -1,
+            'posts_per_page' => 2,
             'post_status'    => 'publish',
             'tax_query' => [
                 [
